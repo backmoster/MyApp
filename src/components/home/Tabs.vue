@@ -80,10 +80,7 @@ export default {
 .tabs {
   padding: 0.2rem 0;
 }
-.tabs-content{
 
-   /* height:2.5rem; */
-}
 .tabs-content img{
     margin: 0 auto;
     width: .773333rem;

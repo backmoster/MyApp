@@ -1,24 +1,29 @@
 <template>
   <div class="spike">
     <swiper :options="swiperOptions">
-      <swiper-slide>
-        <div class="spike-top">
-          <img src="@/assets/img/spike1.png" alt="" srcset="" />
-          <span>距离结束：</span>
-          <span>37天</span>
-          <span>10</span>
-          <span>:</span>
-          <span>10</span>
-          <span>:</span>
-          <span>10</span>
-        </div>
-        <div class="spike-bottom">
-          <img src="img/spike2.jpg" alt="" />
-          <div class="bottom-title">
-            <p>士大夫操作系统差味儿无形资产阿萨德发送到a</p>
-            <div class="bottom-price">
-              <span>￥999</span>
-              <p>剩下285个</p>
+      <swiper-slide v-for="items in spikeList" :key="items.index">
+        <div class="spike-content">
+          <div class="spike-top">
+            <img src="@/assets/img/spike1.png" alt="" srcset="" />
+            <span>距离结束：</span>
+            <Countdown
+              :currentTime="items.startTime"
+              :startTime="items.startTime"
+              :endTime="items.endTime"
+              :dayTxt="'天'"
+              :hourTxt="':'"
+              :minutesTxt="':'"
+              :secondsTxt="''"
+            ></Countdown>
+          </div>
+          <div class="spike-bottom">
+            <img :src="items.imgUrl" alt="" />
+            <div class="bottom-title">
+              <p>{{ items.title }}</p>
+              <div class="bottom-price">
+                <span>￥{{ items.price }}</span>
+                <p>剩下{{ items.num }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -29,7 +34,12 @@
   </div>
 </template>
 <script>
+import Countdown from "vue2-countdown";
 export default {
+  props:['spikeList'],
+  components: {
+    Countdown,
+  },
   data() {
     return {
       swiperOptions: {
@@ -38,16 +48,19 @@ export default {
           el: ".swiper-pagination",
         },
       },
+    
     };
   },
 };
 </script>
 <style scoped>
 .spike {
-  padding: 0.3rem;
+  width: 100%;
   height: 4.37777rem;
 }
-
+.spike-content {
+  padding: 0.3rem;
+}
 .spike-top {
   width: 100%;
   height: 1.29333rem;
@@ -61,6 +74,15 @@ export default {
 }
 .spike-top span {
   margin-left: 0.15rem;
+}
+.spike-top > div {
+  margin-left: 0.15rem;
+}
+.spike-top >>> div span {
+  margin-left: 0.15rem;
+  color: #fff;
+  border-radius: 0.1rem;
+  background: #8b8b8b;
 }
 .spike-bottom {
   display: flex;
@@ -77,10 +99,10 @@ export default {
   line-height: 0.38rem;
   color: #333333;
   font-size: 0.35rem;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 .bottom-price {
   margin-top: 0.8rem;
@@ -101,9 +123,10 @@ export default {
 .swiper-pagination >>> .swiper-pagination-bullet-active {
   background: orange;
 }
+
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
 .swiper-container-horizontal > .swiper-pagination-bullets {
-  bottom: -0.8rem;
+  bottom: 1px;
 }
 </style>

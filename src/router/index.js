@@ -9,6 +9,11 @@ import Home from '../components/home/Home.vue'
     name: 'Home',
     component: Home
   },
+  {
+    path: '/city',
+    name: 'City',
+    component: ()=>import('../components/city/City.vue')
+  },
 
 ]
 

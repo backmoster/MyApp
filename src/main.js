@@ -21,6 +21,9 @@ Vue.use(VueAwesomeSwiper)
 //animate 动画
 import animate from 'animate.css'
 Vue.use(animate)
+//axios
+import axios from 'axios'
+Vue.prototype.axios=axios
 
 new Vue({
   router,
